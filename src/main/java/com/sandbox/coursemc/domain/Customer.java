@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sandbox.coursemc.domain.enums.CustomerType;
 
 @Entity
@@ -28,6 +29,7 @@ public class Customer implements Serializable {
 	private String cpfOrCnpj;
 	private Integer tipo;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy="customer")
 	private List<Address> addresses = new ArrayList<>();
 	
