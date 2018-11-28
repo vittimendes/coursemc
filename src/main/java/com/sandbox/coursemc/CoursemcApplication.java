@@ -130,6 +130,7 @@ public class CoursemcApplication implements CommandLineRunner{
 		p2.getItems().addAll(Arrays.asList(ir3));
 		p3.getItems().addAll(Arrays.asList(ir2));
 		*/
+		
 		itemrequestRepository.saveAll(Arrays.asList(ir1, ir2, ir3));
 		
 	}
