@@ -2,7 +2,9 @@ package com.sandbox.coursemc.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -32,6 +35,9 @@ public class Product implements Serializable {
 	)
 	private List<Category> categories = new ArrayList<>();
 	
+	@OneToMany(mappedBy="id.product")
+	private Set<ItemRequest> items = new HashSet<>();
+	
 	public Product() {
 		
 	}
@@ -41,6 +47,14 @@ public class Product implements Serializable {
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
+	}
+	
+	public List<Request> getRequests(){
+		List<Request> list = new ArrayList<>();
+		for (ItemRequest x : items) {
+			list.add(x.getRequest());
+		}
+		return list;
 	}
 
 	public Integer getId() {
@@ -75,6 +89,15 @@ public class Product implements Serializable {
 		this.categories = categories;
 	}
 
+	public Set<ItemRequest> getItems() {
+		return items;
+	}
+
+	public void setItems(Set<ItemRequest> items) {
+		this.items = items;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -99,8 +122,6 @@ public class Product implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
 	
 
 }

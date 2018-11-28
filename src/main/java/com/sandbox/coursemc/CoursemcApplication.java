@@ -12,6 +12,7 @@ import com.sandbox.coursemc.domain.Address;
 import com.sandbox.coursemc.domain.Category;
 import com.sandbox.coursemc.domain.City;
 import com.sandbox.coursemc.domain.Customer;
+import com.sandbox.coursemc.domain.ItemRequest;
 import com.sandbox.coursemc.domain.Payment;
 import com.sandbox.coursemc.domain.PaymentWithCredicard;
 import com.sandbox.coursemc.domain.PaymentWithTicket;
@@ -24,6 +25,7 @@ import com.sandbox.coursemc.repositories.AddressRepository;
 import com.sandbox.coursemc.repositories.CategoryRepository;
 import com.sandbox.coursemc.repositories.CityRepository;
 import com.sandbox.coursemc.repositories.CustomerRepository;
+import com.sandbox.coursemc.repositories.ItemRequestRepository;
 import com.sandbox.coursemc.repositories.PaymentRepository;
 import com.sandbox.coursemc.repositories.ProductRepository;
 import com.sandbox.coursemc.repositories.RequestRepository;
@@ -48,6 +50,9 @@ public class CoursemcApplication implements CommandLineRunner{
 	private RequestRepository requestRepository;
 	@Autowired
 	private PaymentRepository paymentRepository;
+	@Autowired
+	private ItemRequestRepository itemrequestRepository;
+	
 	
 
 	public static void main(String[] args) {
@@ -111,6 +116,21 @@ public class CoursemcApplication implements CommandLineRunner{
 		
 		requestRepository.saveAll(Arrays.asList(ord1, ord2));
 		paymentRepository.saveAll(Arrays.asList(pay1, pay2));
+
+		ItemRequest ir1 = new ItemRequest(ord1, p1, 0.00, 1, 2000.00);
+		ItemRequest ir2 = new ItemRequest(ord1, p3, 0.00, 2, 80.0);
+		ItemRequest ir3 = new ItemRequest(ord2, p2, 100.00, 1, 800.00);
+		
+		/*
+		ord1.getItems().addAll(Arrays.asList(ir1, ir2));
+		ord2.getItems().addAll(Arrays.asList(ir3));
+		*/
+		/*
+		p1.getItems().addAll(Arrays.asList(ir1));
+		p2.getItems().addAll(Arrays.asList(ir3));
+		p3.getItems().addAll(Arrays.asList(ir2));
+		*/
+		itemrequestRepository.saveAll(Arrays.asList(ir1, ir2, ir3));
 		
 	}
 }
