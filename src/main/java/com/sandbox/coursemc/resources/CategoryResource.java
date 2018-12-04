@@ -14,7 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.sandbox.coursemc.domain.Category;
 import com.sandbox.coursemc.services.CategoryService;
 
-import javassist.tools.rmi.ObjectNotFoundException;
+
 
 @RestController
 @RequestMapping(value="/categories")
@@ -24,7 +24,7 @@ public class CategoryResource {
 	private CategoryService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<Category> find(@PathVariable Integer id) throws ObjectNotFoundException {
+	public ResponseEntity<Category> find(@PathVariable Integer id) {
 		Category obj = service.find(id);		
 		return ResponseEntity.ok(obj);
 		

@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 import com.sandbox.coursemc.domain.Category;
 import com.sandbox.coursemc.repositories.CategoryRepository;
 
-import javassist.tools.rmi.ObjectNotFoundException;
+import com.sandbox.coursemc.services.exceptions.ObjectNotFoundException;
+
 
 @Service
 public class CategoryService {
@@ -16,10 +17,10 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository repo;
 	
-	public Category find(Integer id) throws ObjectNotFoundException {
+	public Category find(Integer id) {
 		Optional<Category> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Category.class.getName()));				
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Category.class.getName()));
 	}
 	
 	public Category insert (Category obj) {
@@ -28,7 +29,7 @@ public class CategoryService {
 	}
 	
 	public Category update (Category obj) {
-		//find(obj.getId());		
+		find(obj.getId());		
 		return repo.save(obj);
 	}
 }
