@@ -20,7 +20,7 @@ public class RequestResource {
 	private RequestService service;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) throws ObjectNotFoundException {
+	public ResponseEntity<Request> find(@PathVariable Integer id) throws ObjectNotFoundException {
 		Request obj = service.find(id);		
 		return ResponseEntity.ok(obj);
 		
